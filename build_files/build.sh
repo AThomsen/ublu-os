@@ -12,6 +12,9 @@ set -ouex pipefail
 # this installs a package from fedora repos
 
 # Use lightdm instead of gdm
+
+cp -R /ctx/system/* /
+
 systemctl disable gdm.service
 
 dnf5 install -y lightdm lightdm-gtk slick-greeter
