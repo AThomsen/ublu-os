@@ -35,7 +35,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh
 
-RUN echo "test" > /myfile.txt
+
     
 ### LINTING
 ## Verify final image and contents are correct.
