@@ -10,7 +10,9 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux 
+
+# Use lightdm instead of gdm
+systemctl disable gdm.service
 
 dnf5 install -y lightdm lightdm-gtk slick-greeter
 
@@ -21,8 +23,7 @@ dnf5 install -y lightdm lightdm-gtk slick-greeter
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-# Use lightdm instead of gdm
-systemctl disable gdm.service
+
 systemctl enable lightdm.service
 
 #### Example for enabling a System Unit File
@@ -31,6 +32,6 @@ systemctl enable podman.socket
 
 ## Configure lightdm guest session (source https://aur.archlinux.org/packages/lightdm-guest-account)
 install -m 755 /ctx/lightdm/guest-account.sh /usr/bin/guest-account
-install -m 644 /ctx/lightdm-autologin.sysusers /usr/lib/sysusers.d/lightdm-autologin.conf
+install -m 644 /ctx/lightdm/lightdm-autologin.sysusers /usr/lib/sysusers.d/lightdm-autologin.conf
 # todo: should this be in /etc as it is mutable?
 install -dm 755 /etc/guest-session/skel
